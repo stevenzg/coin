@@ -1,20 +1,20 @@
-var coinFalling = (function () {
+var coinFalling = (function (root, doc) {
   var totalCoins = 10;
   var intervalTop;
-  //var screenWidth = document.body.clientWidth;
-  //var screenHeight = document.body.scrollHeight;
-  var screenWidth = window.innerWidth;
-  var screenHeight = window.innerHeight;
+  //var screenWidth = doc.body.clientWidth;
+  //var screenHeight = doc.body.scrollHeight;
+  var screenWidth = root.innerWidth;
+  var screenHeight = root.innerHeight;
 
   function caughtCoin(node) {
     console.log('clicked:', node);
     if (node.parentNode) {
       node.parentNode.removeChild(node);
     }
-    var currentGrade = document.getElementById('caught-coins').innerHTML;
+    var currentGrade = doc.getElementById('caught-coins').innerHTML;
     currentGrade = parseInt(currentGrade);
     console.log('currentGrade:', typeof currentGrade);
-    document.getElementById('caught-coins').innerHTML = currentGrade+1;
+    doc.getElementById('caught-coins').innerHTML = currentGrade+1;
   }
 
   function Coin() {
@@ -24,7 +24,7 @@ var coinFalling = (function () {
     }
 
     this.topPosition = -60;
-    this.img = document.createElement('img');
+    this.img = doc.createElement('img');
     this.img.setAttribute('src', 'imgs/coin.png');
     this.img.style.position = 'absolute';
     this.img.style.left = leftPosition + 'px';
@@ -51,8 +51,8 @@ var coinFalling = (function () {
   }
 
   function displayImg (imgObj) {
-    document.getElementById('container').appendChild(imgObj.img);
-    var interval = window.setInterval(function() {
+    doc.getElementById('container').appendChild(imgObj.img);
+    var interval = root.setInterval(function() {
       imgObj.interval = interval;
       moveCoin(imgObj);
     }, 100);
@@ -63,11 +63,11 @@ var coinFalling = (function () {
 
     console.log('totalCoins:xxx:', totalCoins);
     if (totalCoins === 0) {
-      var imgChildNodes = document.getElementById('container').childNodes.length;
+      var imgChildNodes = doc.getElementById('container').childNodes.length;
       if (imgChildNodes === 0) {
-        document.getElementById('total-grades').innerHTML = document.getElementById('caught-coins').innerHTML;
-        document.getElementById('final-grades').style.display = 'block';
-        document.getElementById('grades').style.display = 'none';
+        doc.getElementById('total-grades').innerHTML = doc.getElementById('caught-coins').innerHTML;
+        doc.getElementById('final-grades').style.display = 'block';
+        doc.getElementById('grades').style.display = 'none';
         clearInterval(intervalTop);
       }
       return;
@@ -90,7 +90,7 @@ var coinFalling = (function () {
     intervalTop = setInterval(generateCoins, 2000);
   }
 
-}());
+}(window, document));
 
 
 
