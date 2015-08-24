@@ -1,0 +1,38 @@
+html, body {
+  height: 100%;
+  margin: 0 auto;
+  padding: 0;
+}
+
+body {
+  background-image: url(../imgs/background.gif);
+  background-attachment: fixed;
+  background-position: top left;
+  background-repeat: repeat-x;
+  color: #fb5;
+  background-color: #334;
+  /*background-color: #474445;*/
+}
+
+#grades {
+  position: absolute;
+  bottom: 0;
+  margin: 0 auto;
+  text-align: center;
+  width: 100%;
+  font-size: 30px;
+}
+
+#caught-coins {
+  color: #30C844
+}
+
+.total-coins {
+  color: #fff;
+}
+
+#final-grades {
+  display: none;
+  text-align: center;
+  margin-top: 100px;
+}
