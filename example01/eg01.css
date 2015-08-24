@@ -5,10 +5,10 @@ html, body {
 }
 
 body {
-  background-image: url(../imgs/background.gif);
-  background-attachment: fixed;
-  background-position: top left;
-  background-repeat: repeat-x;
+  /*background-image: url(../imgs/background.gif);*/
+  /*background-attachment: fixed;*/
+  /*background-position: top left;*/
+  /*background-repeat: repeat-x;*/
   color: #fb5;
   background-color: #334;
   /*background-color: #474445;*/
