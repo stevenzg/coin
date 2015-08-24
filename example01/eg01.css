@@ -17,6 +17,9 @@ body {
 img {
   outline : none;
 }
+*:focus {
+  outline: none;
+}
 
 #grades {
   position: absolute;

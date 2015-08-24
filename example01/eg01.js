@@ -31,7 +31,7 @@ var coinFalling = (function (root, doc) {
     this.img.style.top = '-60px';
     this.img.style.width = '60px';
     this.img.style.height = '60px';
-    this.img.addEventListener('click', function () {
+    this.img.addEventListener('touchend click', function () {
       console.log('clicking');
       caughtCoin(this);
     }, false);
