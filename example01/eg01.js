@@ -14,7 +14,7 @@ var coinFalling = (function (root, doc) {
     var currentGrade = doc.getElementById('caught-coins').innerHTML;
     currentGrade = parseInt(currentGrade);
     console.log('currentGrade:', typeof currentGrade);
-    doc.getElementById('caught-coins').innerHTML = currentGrade+1;
+    doc.getElementById('caught-coins').innerHTML = currentGrade + 1;
   }
 
   function Coin() {
@@ -25,21 +25,21 @@ var coinFalling = (function (root, doc) {
 
     this.topPosition = -60;
     this.img = doc.createElement('img');
-    this.img.setAttribute('src', 'imgs/coin.png');
+    this.img.setAttribute('src', 'imgs/jinbi.png');
     this.img.style.position = 'absolute';
     this.img.style.left = leftPosition + 'px';
     this.img.style.top = '-60px';
     this.img.style.width = '60px';
     this.img.style.height = '60px';
-    this.img.addEventListener('touchend click', function () {
+    this.img.addEventListener('click', function () {
       console.log('clicking');
       caughtCoin(this);
     }, false);
   }
 
-  function moveCoin (currentImg) {
+  function moveCoin(currentImg) {
     currentImg.topPosition = currentImg.topPosition + 15;
-    if(currentImg.topPosition > screenHeight-60) {
+    if (currentImg.topPosition > screenHeight - 60) {
       clearInterval(currentImg.interval);
       var node = currentImg.img;
       if (node.parentNode) {
@@ -50,9 +50,9 @@ var coinFalling = (function (root, doc) {
     }
   }
 
-  function displayImg (imgObj) {
+  function displayImg(imgObj) {
     doc.getElementById('container').appendChild(imgObj.img);
-    var interval = root.setInterval(function() {
+    var interval = root.setInterval(function () {
       imgObj.interval = interval;
       moveCoin(imgObj);
     }, 100);
@@ -85,7 +85,7 @@ var coinFalling = (function (root, doc) {
     }
   }
 
-  return function() {
+  return function () {
     generateCoins();
     intervalTop = setInterval(generateCoins, 2000);
   }

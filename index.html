@@ -7,16 +7,22 @@
   <link rel="stylesheet" type="text/css" href="example01/eg01.css">
 </head>
 <body>
-<div id="container"></div>
-<div id="grades">
-  <span id="caught-coins">0</span>/<span class="total-coins">10</span>
-</div>
-<div id="final-grades">
-  <h1><span class="total-coins">您最终拿到的金币数量：</span><span id="total-grades"></span></h1>
-</div>
-<script src="example01/eg01.js"></script>
-<script>
-  coinFalling();
-</script>
+  <div id="container"></div>
+  <div id="grades">
+    <span id="caught-coins">0</span>/<span class="total-coins">10</span>
+  </div>
+  <div id="final-grades">
+    <h1><span class="total-coins">您最终拿到的金币数量：</span><span id="total-grades"></span></h1>
+  </div>
+  <script src="example01/fastclick.js"></script>
+  <script src="example01/eg01.js"></script>
+  <script>
+    if ('addEventListener' in document) {
+      document.addEventListener('DOMContentLoaded', function() {
+        FastClick.attach(document.body);
+      }, false);
+    }
+    coinFalling();
+  </script>
 </body>
 </html>
