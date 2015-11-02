@@ -77,7 +77,7 @@ var Coin = {
     window.addEventListener('touchstart', function(e) {
       console.log('touchstart');
       e.preventDefault();
-      Coin.Event.set(e.touches[0]);
+      Coin.Event.add(e.touches[0]);
     }, false);
 
     window.addEventListener('touchmove', function(e) {
