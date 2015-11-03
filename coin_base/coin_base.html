@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>送钱咯，点到多少，送多少</title>
   <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-  <link rel="stylesheet" type="text/css" href="example01/eg01.css">
+  <link rel="stylesheet" type="text/css" href="coin_base.css">
 </head>
 <body>
   <div id="container"></div>
@@ -14,14 +14,14 @@
   <div id="final-grades">
     <h1><span class="total-coins">您最终拿到的金币数量：</span><span id="total-grades"></span></h1>
   </div>
-  <script src="example01/fastclick.js"></script>
-  <script src="example01/eg01.js"></script>
+  <!--<script src="fastclick.js"></script>-->
+  <script src="coin_base.js"></script>
   <script>
-    if ('addEventListener' in document) {
-      document.addEventListener('DOMContentLoaded', function() {
-        FastClick.attach(document.body);
-      }, false);
-    }
+//    if ('addEventListener' in document) {
+//      document.addEventListener('DOMContentLoaded', function() {
+//        FastClick.attach(document.body);
+//      }, false);
+//    }
     coinFalling();
   </script>
 </body>

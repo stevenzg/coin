@@ -9,7 +9,6 @@ window.requestAnimFrame = (function(){
     };
 })();
 
-
 var helloWorldImage = new Image();
 helloWorldImage.src = 'ele.png';
 
@@ -115,6 +114,7 @@ var Coin = {
     Coin.tick -= 1;
 
     if (Coin.tick < 0) {
+      Coin.elements.push(new Coin.Cloud());
       Coin.elements.push(new Coin.RMB());
       Coin.tick = ( Math.random() * 100 ) + 100;
     }
@@ -134,8 +134,7 @@ var Coin = {
         // 当击中后，显示一些碎片
         if (hit) {
           for (var n = 0; n < 5; ++n) {
-            Coin.elements.push(new Coin.Particle(Coin.elements[i].x, Coin.elements[i].y
-            ));
+            Coin.elements.push(new Coin.Particle(Coin.elements[i].x, Coin.elements[i].y));
           }
           Coin.score.hit += 1;
         }
@@ -154,6 +153,8 @@ var Coin = {
     for (var i = 0, len = Coin.elements.length; i < len; ++i) {
       Coin.elements[i].render();
     }
+    Coin.Draw.text('红包: ' + Coin.score.hit/10 + ' 元', 20, 30, 14, '#fff');
+    Coin.Draw.text('丢失: ' + Coin.score.escaped/10 + ' 元', 20, 50, 14, '#fff');
   },
 
   falling: function () {
@@ -189,9 +190,87 @@ Coin.Draw = {
 
   image: function (dx, dy, radius) {
     Coin.context.drawImage(helloWorldImage, dx, dy, radius, radius);
+  },
+
+  cloud: function (cx, cy, cw, ch) {
+    Coin.context.beginPath();
+    //Coin.context.fillStyle = "white";
+    //创建渐变
+    var grd = Coin.context.createLinearGradient(0, 0, 0, cy);
+    grd.addColorStop(0, 'rgba(255,255,255,0.8)');
+    grd.addColorStop(1, 'rgba(255,255,255,0.5)');
+    Coin.context.fillStyle = grd;
+    Coin.context.fill();
+    //在不同位置创建5个圆拼接成云朵现状
+    Coin.context.arc(
+      cx,
+      cy,
+      cw * 0.19,
+      0,
+      360,
+      false
+    );
+    Coin.context.arc(
+      cx + cw * 0.08,
+      cy - ch * 0.3,
+      cw * 0.11,
+      0,
+      360,
+      false
+    );
+    Coin.context.arc(
+      cx + cw * 0.3,
+      cy - ch * 0.25,
+      cw * 0.25,
+      0,
+      360,
+      false
+    );
+    Coin.context.arc(
+      cx + cw * 0.6,
+      cy,
+      cw * 0.21,
+      0,
+      360,
+      false
+    );
+    Coin.context.arc(
+      cx + cw * 0.3,
+      cy - ch * 0.1,
+      cw * 0.28,
+      0,
+      360,
+      false
+    );
+    Coin.context.closePath();
+    Coin.context.fill();
   }
 };
 
+Coin.Cloud = function () {
+  this.x = 0;
+  this.y = Math.random() * 50;
+  this.y = this.y < 30 ? 30: this.y;
+  //this.y = 30;
+
+  this.width = Math.random()*30 + 20;
+  //this.width = 50;
+
+  this.height = this.width * 0.6;
+  this.remove = false;
+
+  this.updateElement = function () {
+    //this.x += Math.random();
+    this.x += 0.5;
+    if (this.x > Coin.WIDTH + 10) {
+      this.remove = true;
+    }
+  };
+
+  this.render = function () {
+    Coin.Draw.cloud(this.x, this.y, this.width, this.height);
+  };
+};
 
 // 点击后的碎片效果
 Coin.Particle = function(x, y) {

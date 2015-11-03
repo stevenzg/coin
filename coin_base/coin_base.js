@@ -7,13 +7,11 @@ var coinFalling = (function (root, doc) {
   var screenHeight = root.innerHeight;
 
   function caughtCoin(node) {
-    console.log('clicked:', node);
     if (node.parentNode) {
       node.parentNode.removeChild(node);
     }
     var currentGrade = doc.getElementById('caught-coins').innerHTML;
     currentGrade = parseInt(currentGrade);
-    console.log('currentGrade:', typeof currentGrade);
     doc.getElementById('caught-coins').innerHTML = currentGrade + 1;
   }
 
@@ -25,14 +23,19 @@ var coinFalling = (function (root, doc) {
 
     this.topPosition = -60;
     this.img = doc.createElement('img');
-    this.img.setAttribute('src', 'imgs/jinbi.png');
+    this.img.setAttribute('src', 'jinbi.png');
     this.img.style.position = 'absolute';
     this.img.style.left = leftPosition + 'px';
     this.img.style.top = '-60px';
     this.img.style.width = '60px';
     this.img.style.height = '60px';
     this.img.addEventListener('click', function () {
-      console.log('clicking');
+      console.log('click');
+      caughtCoin(this);
+    }, false);
+    this.img.addEventListener('touchstart', function(e) {
+      console.log('touchstart');
+      e.preventDefault();
       caughtCoin(this);
     }, false);
   }
@@ -61,7 +64,6 @@ var coinFalling = (function (root, doc) {
   function generateCoins() {
     var popCount = Math.floor(Math.random() * ( 2 + 1)) + 1;
 
-    console.log('totalCoins:xxx:', totalCoins);
     if (totalCoins === 0) {
       var imgChildNodes = doc.getElementById('container').childNodes.length;
       if (imgChildNodes === 0) {
@@ -77,8 +79,6 @@ var coinFalling = (function (root, doc) {
       popCount = totalCoins;
       totalCoins = 0;
     }
-    console.log('remainCoins:xxx:', totalCoins);
-    console.log('popCount:xxx:', popCount);
     for (var i = 0; i < popCount; i++) {
       var image = new Coin();
       displayImg(image);

@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <style>
+    html,body{
+      background:#049ec4;
+      background-repeat:repeat-y;
+      margin:0;
+      height: 100%;
+      overflow:hidden;
+      font-family:'microsoft yahei',Arial,sans-serif;
+    }
+  </style>
+</head>
+<body onLoad="showCloud();">
+</body>
+
+<script>
+  /*Javascript代码片段*/
+  //创建画布并开始动画
+  function showCloud(){
+//创建画布设置画布属性
+    var canvas = document.createElement("canvas");
+    canvas.width = document.body.clientWidth;
+    canvas.height = document.body.clientHeight;
+    canvas.style.position = "absolute";
+    canvas.style.zIndex = 0;
+    var ctx = canvas.getContext("2d");
+    //向body中添加画布
+    document.body.appendChild(canvas);
+    //设置一个初始X轴位置
+    var i = 0;
+    //循环更新画布
+    window.setInterval(function() {
+      //清空画布
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      //绘制一朵云
+      drawCloud(ctx, i, canvas.height * 0.2, canvas.width * 0.25);
+      //云朵向右随机移动
+      i += Math.random() + 2;
+    },80)
+  }
+
+
+  /*渲染单个云朵
+   context:  canvas.getContext("2d")对象
+   cx: 云朵X轴位置
+   cy: 云朵Y轴位置
+   cw: 云朵宽度
+   */
+  function drawCloud(context, cx, cy, cw) {
+    cw = 50;
+    cy = 30;
+//    cy = Math.random() * 50;
+//    if (cy < 30) {
+//      cy = 30;
+//    }
+//云朵移动范围即画布宽度
+    var maxWidth = context.canvas.width;
+//如果超过边界从头开始绘制
+    cx = cx % maxWidth;
+//云朵高度为宽度的60%
+    var ch = cw * 0.6;
+//开始绘制云朵
+    context.beginPath();
+    //创建渐变
+    var grd = context.createLinearGradient(0, 0, 0, cy);
+    grd.addColorStop(0, 'rgba(255,255,255,0.8)');
+    grd.addColorStop(1, 'rgba(255,255,255,0.5)');
+    context.fillStyle = grd;
+    context.fill();
+    //在不同位置创建5个圆拼接成云朵现状
+    context.arc(cx, cy, cw * 0.19, 0, 360, false);
+    context.arc(cx + cw * 0.08, cy - ch * 0.3, cw * 0.11, 0, 360, false);
+    context.arc(cx + cw * 0.3, cy - ch * 0.25, cw * 0.25, 0, 360, false);
+    context.arc(cx + cw * 0.6, cy, cw * 0.21, 0, 360, false);
+    context.arc(cx + cw * 0.3, cy - ch * 0.1, cw * 0.28, 0, 360, false);
+    context.closePath();
+    context.fill();
+  }
+</script>
+</html>
